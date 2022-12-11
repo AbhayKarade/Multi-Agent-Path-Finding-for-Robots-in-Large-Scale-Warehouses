@@ -213,8 +213,9 @@ class CBSSolver(object):
 
             collisions = detect_collisions(node['paths'])
             if not collisions:
-                self.print_results(node)
-                return node['paths']
+                # self.print_results(node)
+                self.CPU_time = (timer.time() - self.start_time) * 1000
+                return node['paths'], self.CPU_time
 
             first_collision = collisions[0]
             constraints = standard_splitting(first_collision)
@@ -242,8 +243,8 @@ class CBSSolver(object):
 
 
         print('\n No Solution Found! \n')
-        CPU_time = timer.time() - self.start_time
-        print("CPU time (s):    {:.2f}".format(CPU_time))
+        self.CPU_time = (timer.time() - self.start_time)*1000
+        print("CPU time (ms):    {:.2f}".format(self.CPU_time))
         return None
 
 
@@ -252,8 +253,8 @@ class CBSSolver(object):
         print("Constraints:")
         for constraint in node['constraints']:
             print(constraint)
-        CPU_time = timer.time() - self.start_time
-        print("\nCPU time (s):    {:.2f}".format(CPU_time))
+        self.CPU_time = (timer.time() - self.start_time) * 1000
+        print("\nCPU time here (ms):    {:.2f}".format(self.CPU_time))
         print("Sum of costs:    {}".format(get_sum_of_cost(node['paths'])))
         print("Expanded nodes:  {}".format(self.num_of_expanded))
         print("Generated nodes: {}".format(self.num_of_generated))

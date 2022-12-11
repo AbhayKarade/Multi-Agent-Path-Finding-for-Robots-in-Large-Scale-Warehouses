@@ -12,7 +12,15 @@ def get_sum_of_cost(paths):
     rst = 0
     for path in paths:
         rst += len(path) - 1
+        print(len(path))
     return rst
+
+def get_max_path(paths):
+    max = 0
+    for path in paths:
+        if len(path) > max:
+            max = len(path)
+    return max
 
 
 def compute_heuristics(my_map, goal):

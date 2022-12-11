@@ -44,14 +44,17 @@ class PrioritizedPlanningSolver(object):
         # agent_priorities = [1,0]  # Bad ordering for exp2_1.txt
         agent_priorities = range(self.num_of_agents)  # Linear ordering
 
-        for ind,i in enumerate(agent_priorities):  # Find path for each agent          
+        for ind, i in enumerate(agent_priorities):  # Find path for each agent
+            agent_time_start = timer.time()
+
             path = a_star(self.my_map, self.starts[i], self.goals[i], self.heuristics[i],
                           i, constraints)
             if path is None:
                 raise BaseException('No solutions')
             result.append(path)
 
-            for j in range(ind+1,len(agent_priorities)):
+            for j in range(ind+1, len(agent_priorities)):
+
                 agent = agent_priorities[j]
                 for timestep in range(len(path)-1):
                     curr_loc = path[timestep]
@@ -65,12 +68,14 @@ class PrioritizedPlanningSolver(object):
                 constraints.append({'agent': agent, 'loc': path[-1],
                                     'timestep': len(path)-1,
                                     'type': 'inf'})
-        
-        self.CPU_time = timer.time() - start_time
+            agent_time_taken = (timer.time() - agent_time_start)*1000
+            print("agent_time_taken",agent_time_taken)
 
-        print("\n Found a solution! \n")
-        print("CPU time (s):    {:.2f}".format(self.CPU_time))
-        print("Sum of costs:    {}".format(get_sum_of_cost(result)))
-        print(result)
+        self.CPU_time = (timer.time() - start_time) * 1000
 
-        return result
+        # print("\n Found a solution! \n")
+        # print("CPU time (ms):    {:.2f}".format(self.CPU_time))
+        # print("Sum of costs:    {}".format(get_sum_of_cost(result)))
+        # print(result)
+
+        return result,self.CPU_time
