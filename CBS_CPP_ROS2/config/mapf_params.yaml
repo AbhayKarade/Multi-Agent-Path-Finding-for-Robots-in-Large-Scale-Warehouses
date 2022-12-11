@@ -1,0 +1,5 @@
+mapf:
+  ros__parameters:
+    map_resolution: 0.04
+    rows: 10 
+    cols: 10
