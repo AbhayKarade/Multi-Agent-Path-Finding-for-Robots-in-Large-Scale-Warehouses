@@ -38,3 +38,11 @@ To compare the performance of CBS and Prioritized Planning
 ```python
 python run_experiments.py --compare True
 ```
+
+
+
+## References : 
+
+-  [Planning Algorithms and Differential Models](http://lavalle.pl/planning/ch13.pdf)
+
+-[msaudulhassan] (https://github.com/msaudulhassan)
