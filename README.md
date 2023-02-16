@@ -38,5 +38,3 @@ To compare the performance of CBS and Prioritized Planning
 ```python
 python run_experiments.py --compare True
 ```
-
-
